@@ -1,6 +1,7 @@
 package board;
 
 public class BoardDTO {
+	private int		rr;
 	private	int		num;		//ctrl shift y = 소문자로
 	private	int		readcnt;	//alt shift a = 영역 지정
 	private	int 	ref;
@@ -13,6 +14,14 @@ public class BoardDTO {
 	private	String passwd;
 	private	String reg_date;
 	private String attachNm;
+	
+	public int getRr() {
+		return rr;
+	}
+	public void setRr(int rr) {
+		this.rr = rr;
+	}
+	
 	public int getNum() {
 		return num;
 	}
@@ -85,6 +94,5 @@ public class BoardDTO {
 	public void setAttachNm(String attachNm) {
 		this.attachNm = attachNm;
 	}
-	
 	
 }

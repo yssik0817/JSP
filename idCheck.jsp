@@ -8,7 +8,6 @@
 <script type="text/javascript" src="../board/boardScript.js"></script>
 </head>
 <body>
-   <form action="updateForm.jsp">
    <table>
       <tr>
          <td>비밀번호 입력</td>
@@ -29,7 +28,6 @@
       
    
    </table>
-   </form>
    <%
       //String cpass = request.getParameter("cpass");
       //String passwd = request.getParameter("passwd");

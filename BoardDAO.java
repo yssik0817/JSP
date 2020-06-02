@@ -73,12 +73,20 @@ public class BoardDAO {
    }
 
    public List<BoardDTO> getArticles(int sRow, int pageSize) throws NamingException, SQLException {
-      String sql = "select num,writer,subject,email,content,";
-      sql += "passwd,reg_date,readcnt,ref,re_step,re_level, attachnm ";
-      sql += "from board ";
-      sql += "where rownum between 1 and 20 ";
-      sql += "order by ref desc";
-
+//      String sql = "select num,writer,subject,email,content,";
+//      sql += "passwd,reg_date,readcnt,ref,re_step,re_level, attachnm ";
+//      sql += "from board ";
+//      sql += "where rownum between 1 and 20 ";
+//      sql += "order by ref desc";
+	   
+	   String sql="select A.* from (select ROWNUM RR, RBOARD.* "
+					 + "from "
+					 + "(select num,writer,subject,email,content, "
+					 + "passwd,reg_date,readcnt,ref,re_step,re_level, attachnm "
+					 + "from board "
+					 + "order by ref desc, re_step asc) RBOARD) A "
+					 + "where A.RR between 1 and 20";     
+	   
       Connection conn = null;
       conn = DBConnection.getConnection();
       List<BoardDTO> articles = new ArrayList<BoardDTO>(20);
@@ -87,6 +95,7 @@ public class BoardDAO {
 
       while (rs.next()) {
          BoardDTO dto = new BoardDTO();
+         dto.setRr(rs.getInt("rr"));
          dto.setNum(rs.getInt("num"));
          dto.setRef(rs.getInt("ref"));
          dto.setRe_step(rs.getInt("re_step"));
@@ -165,4 +174,66 @@ public class BoardDAO {
 	      //connection 닫기 
 	         return dto;
 	   }
-	}
+   
+   		public int boardUpdate(BoardDTO dto) {
+   		
+   		int r = 0;
+   			
+   		PreparedStatement pstmt = null;
+   		 
+         try {
+        	 String sql="update board set " +
+  					"SUBJECT=?, " + 
+					"EMAIL=?, " + 
+					"CONTENT=?, " + 
+        			"PASSWD=?, " + 
+        			"ATTACHNM=? "+ 
+        			" where num=?";	
+        			
+        	 Connection conn= DBConnection.getConnection();
+        	 pstmt = conn.prepareStatement(sql);
+        	 pstmt.setString(1, dto.getSubject());
+        	 pstmt.setString(2, dto.getEmail());
+        	 pstmt.setString(3, dto.getContent());
+        	 pstmt.setString(4, dto.getPasswd());
+        	 pstmt.setString(5, dto.getAttachNm());
+        	 pstmt.setInt(6, dto.getNum());
+        	 
+        	 r=pstmt.executeUpdate();
+        	 
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+         	return r;
+   		}
+   		
+   		public int deleteArticle(int num) {
+   			//DB연결
+   		int r=0;	
+   		PreparedStatement pstmt = null;
+   		Connection conn=null;
+	      
+   		try {
+   			conn=DBConnection.getConnection();
+   				//쿼리 만들기
+   			String sql = "delete from where num=?";
+   				//pstmt 만들기
+   			pstmt = conn.prepareStatement(sql);
+   			pstmt.setInt(1, num);
+   			r=pstmt.executeUpdate();
+   			}catch(SQLException e) {
+ 	         e.printStackTrace();
+   				} catch (NamingException e) {
+   					e.printStackTrace();
+   				}
+   				try {
+   					if(pstmt!=null)pstmt.close();
+   					if (conn!=null)conn.close();
+   				} catch (SQLException e) {
+   					e.printStackTrace();
+   				}	
+   			return r;
+   			}
+		}

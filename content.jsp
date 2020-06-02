@@ -83,7 +83,7 @@ function sendData(){
             </tr>
             <tr>
                <th>내용 : </th>
-               <td><textarea cols="80" rows="20">
+               <td><textarea cols="80" rows="20" readonly="readonly">
                <c:out value="${dto.content}"/></textarea></td>
             </tr>
             <tr>
@@ -102,26 +102,19 @@ function sendData(){
             --%>
             <tr>
                <td colspan="2" align = "center">
-               <input type="button" value="글 수정" 
-               onclick="pwCheck();"/>
+               <input type="button" value="글 수정" onclick="pwCheck('u');"/>
                
-               <%-- javascript:location.href='updateForm.jsp?num=<c:out value="${dto.num }"/>' --%>
-               <input type="button" value="글 삭제" 
-               onclick="javascript:location.href='deleteForm.jsp?num=<c:out value="${dto.num }"/>'"/>
+               <input type="button" value="글 삭제"onclick="pwCheck('d');"/>
                <input type="button" value="글 목록으로" 
                onclick="javascript:location.href='boardList.jsp'" />
                </td>
             </tr>
          </tbody>
       </table>
-      <form action="updateForm.jsp" name = "parentForm" method="post">
+      <form action="" name = "parentForm" method="post">
          <input type="text" name = "passwd" value = "${dto.passwd }">
-         <input type="text" name = "num" value = "${dto.num }">
-         <input type="text" name = "cpass" value = "">
-      
-      
-      
-      
+         <input type="hidden" name = "num" value = "${dto.num }">
+         <input type="hidden" name = "cpass" value = "">
       </form>
 
 </body>

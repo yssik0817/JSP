@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>글목록</title>
 <!-- <link href="/css/board.css" rel="stylesheet"> -->
-<link rel="stylesheet" href="./css/board.css" >
+<link rel="stylesheet" href="./css/board.css">
 </head>
 <body>
 	<!-- 글목록 출력 -->
@@ -51,7 +51,9 @@
             <tbody class="class03">
                <c:forEach var="dto" items="${list}">
                   <tr>
-                     <td><c:out value="${dto.num }" /></td>
+                     <td><c:out value="${dto.rr}" />
+                     	<input type="hidden" value = '<c:out value="${dto.num}"/>'>
+                     	</td>
                      <td><a href='content.jsp?num=<c:out value="${dto.num }"/>'>
                            <c:out value="${dto.subject }" />
                      </a></td>

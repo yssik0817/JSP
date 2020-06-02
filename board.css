@@ -1,36 +1,23 @@
 table{
-	text-align: center;
-	line-height:1.5;
-	margin-left: auto;
-	margin-right: auto;
+   text-align: center;
+   line-height: 1.5;
+   margin-left: auto;
+   margin-right: auto;
+   width:90%;
 }
-
-.class01{
-	background: #1EF3DE;
-	width:70%;
-}
-
-.class02{
-	background: #1EF3DL;
-	width:70%;
-}
-.class-center{
-	margin-left: auto;
-	margin-right: auto;
-	
-}
-
 table, th, td{
-	border: 1px solid #bcbcbc;
+   border: 1px
+}
+.class02{
+   background-color: #1ef3de;
+}
+.class03{
+   background-color: #e0eeed;
+   
 }
 
-h3{
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
+.class-center{
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
 }
-
-
-
-
-

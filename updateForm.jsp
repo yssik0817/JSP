@@ -9,21 +9,12 @@
 <meta charset="UTF-8">
 <title>비밀번호 확인 </title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="../board/boardScript.js"></script>
+<script type="text/javascript" src="/JSP/board2/js/boardScript.js"></script>
+<script type="text/javascript" src="/JSP/board2/js/jquery_board.js"></script>
 </head>
 <body>
-    <%
-   /* String passwd = request.getParameter("passwd"); */
-   int num = Integer.parseInt(request.getParameter("num"));
 
-     //DAO사용.. 인스턴스얻어오기
-    BoardDAO dao = BoardDAO.getInstance();
-   //해당 인스턴스에서 해당되는 메소드 실행
-   BoardDTO dto = dao.getArticle(num);
-   //setAttribute를 해줘야 됨
-     request.setAttribute("dto",dto);
-   %>
-   <form action="updatePro.jsp" method="post" name="writeForm" onsubmit="return sendData()">
+   <form action="updatePro.do" method="post" name="writeForm" onsubmit="return sendData()">
       <table border=1>
          <thead>
             <tr>
@@ -79,7 +70,7 @@
                <td colspan="2">
                <input type="submit" value="글 수정">
                <input type="button" value="글 목록으로..." id="list1"
-               onclick="javascript:location.href='boardList.jsp'" /></td>
+               onclick="javascript:location.href='list.do'" /></td>
             </tr>
          </tbody>
       </table>

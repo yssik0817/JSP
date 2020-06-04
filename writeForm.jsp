@@ -6,12 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 글쓰기</title>
-<script type="text/javascript" src="../board/boardScript.js"></script>
+<script type="text/javascript" src="/JSP/js/boardScript.js"></script>
+<script type="text/javascript" src="/JSP/js/jquery_board.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="./css/board.css">
 </head>
 <body>
-
-   <form action="writePro.jsp" method="post" name="writeForm" onsubmit="return sendData()">
+	<jsp:useBean id="dto" class="board.BoardDTO"/>
+	<jsp:setProperty property="*" name="dto"/>
+	
+	<form action="writePro.do" method="post" name="writeForm" onsubmit="return sendData()">
+   
+        <input type="hidden" name = "num" value = "${num}">
+        <input type="hidden" name = "ref" value = "${ref}">
+        <input type="hidden" name = "re_step" value = "${re_step}">
+        <input type="hidden" name = "re_level" value = "${re_level}">
+   
       <table border=1>
          <thead>
             <tr>
@@ -23,8 +33,15 @@
          <tbody>
             <tr>
                <th>제목 : </th>
-               <td><input type="text" size="100%" 
+               <c:if test="${num==0}">
+               <td><input type="text" size="70%" 
                placeholder="제목을 입력하세요" name="subject" /></td>
+               </c:if>
+               
+               <c:if test="${num!=0}">
+               <td><input type="text" size="70%" 
+               placeholder="제목을 입력하세요" name="subject" value="[답글]" /></td>
+               </c:if>
             </tr>
             <tr>
                <th>내용 : </th>
@@ -52,10 +69,9 @@
                placeholder="비밀번호를 입력하세요" name="passwd"/></td>
             </tr>
             <tr>
-               <td colspan="2">
+               <td colspan="2" align="center">
                <input type="submit" value="등록">
-               <input type="button" value="글 목록으로" 
-               onclick="javascript:location.href='boardList.jsp'" /></td>
+               <input type="button" value="글 목록으로..." id="list1"/></td>
             </tr>
          </tbody>
       </table>

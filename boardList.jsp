@@ -11,17 +11,17 @@
 <link href="./board2/css/board.css" rel="stylesheet">
 <script type="text/javascript">
 function callContent(num){
-   document.content.num.value=num;
-   document.content.submit();
-
-}
+   	document.content.num.value=num;
+   	document.content.submit();
+	}
 </script>
 </head>
 <body>
    <!-- 글목록 출력 -->
    
    
-   <h3>게시글목록</h3>
+   <h3 style="text-align: center;">게시글목록</h3>
+   
    <c:choose>
    <c:when test="${list.size()==0}">
    <table border="1">
@@ -35,6 +35,10 @@ function callContent(num){
    <c:when test="${list.size()!=0}">
    <table border="1">
    <thead class = "class01">
+   		<tr><td colspan="5">
+   		<h4 style="text-align: right;">전체 글 개수:&nbsp;<c:out value="${pdto.allCount}"/>&nbsp;건</h4>
+   		</td></tr>
+   		
       <tr><td>글번호</td>
          <th>글제목</th>
          <td>글작성자</td>
@@ -79,12 +83,33 @@ function callContent(num){
       </tr>
       </tbody>
    </table>
+   		<h3 style="text-align: center">
+   			<c:if test="${pdto.startPage>pdto.pageBlock}">
+   				<a href="/JSP/list.do?currentPage=${pdto.startPage-pageBlock}&currPageBlock=${pdto.currPageBlock-1}"
+   				 style="text-decoration: none;">[이전]</a>
+  			</c:if>
+   			<c:forEach var="i" begin="${pdto.startPage}" end="${pdto.endPage}">
+   				<a href="/JSP/list.do?currentPage=${i}&currPaageBlock=${pdto.currPageBlock}"
+   					style="text-decoration: none;">
+   				<c:out value="[${i}]"/>&nbsp;</a>
+   			</c:forEach>
+   			<c:if test="${pdto.endPage<pdto.allPage}">
+   				<a href="/JSP/list.do?currentPage=${pdto.endPage+1}&currPageBlock=${pdto.currPageBlock+1}"
+   				 style="text-decoration: none;">[다음]</a>
+   			</c:if>
+   		</h3>
    </c:when>
-   
-   
    </c:choose>
+   
+<!--    <form action="board">
+   		<input type="hidden" name="currentPage"/>
+   		<input type="hidden" name="currentBlock"/>
+   </form> -->
+   
    <form action="content.do" name = "content" method="post" >
-   <input type = "text" name = "num" value = '<c:out value="${dto.num }"/>'>
+   <input type = "hidden" name = "currentPage" value = '<c:out value="${pdto.currentPage}"/>'>
+   <input type = "hidden" name = "currPageBlock" value = '<c:out value="${pdto.currPageBlock}"/>'>
+   <input type = "hidden" name = "num" value = '<c:out value="${dto.num}"/>'>
    </form>
 <%--       
    

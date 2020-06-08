@@ -12,15 +12,14 @@
 <link rel="stylesheet" href="./css/board.css">
 </head>
 <body>
-	<jsp:useBean id="dto" class="board.BoardDTO"/>
-	<jsp:setProperty property="*" name="dto"/>
 	
 	<form action="writePro.do" method="post" name="writeForm" onsubmit="return sendData()">
-   
-        <input type="hidden" name = "num" value = "${num}">
-        <input type="hidden" name = "ref" value = "${ref}">
-        <input type="hidden" name = "re_step" value = "${re_step}">
-        <input type="hidden" name = "re_level" value = "${re_level}">
+    	<input type = "text" name = "currentPage" value = '<c:out value="${pdto.currentPage}"/>'>
+ 		 <input type = "text" name = "currPageBlock" value = '<c:out value="${pdto.currPageBlock}"/>'>
+         <input type="text" name = "num" value = "${num}">
+         <input type="text" name = "ref" value = "${ref}">
+         <input type="text" name = "re_step" value = "${re_step}">
+         <input type="text" name = "re_level" value = "${re_level}">
    
       <table border=1>
          <thead>

@@ -58,19 +58,20 @@
                <input type="button" value="글 수정" onclick="pwCheck('u');"/>
                <input type="button" value="글 삭제"onclick="pwCheck('d');"/>
                <input type="submit" value="답글" id="reply">
-               <input type="button" value="글 목록으로" id="list1"
-               onclick="javascript:location.href='boardList.do'" />
+               <input type="button" value="글 목록으로" id="list1"/>
                </td>
             </tr>
          </tbody>
       </table>
       <form action="" name = "parentForm" method="post">
+      	 <input type = "text" name = "currentPage" value = '<c:out value="${pdto.currentPage}"/>'>
+ 		 <input type = "text" name = "currPageBlock" value = '<c:out value="${pdto.currPageBlock}"/>'>
+         <input type="text" name = "cpass" value = "">
          <input type="text" name = "passwd" value = "${dto.passwd}">
-         <input type="hidden" name = "num" value = "${dto.num}">
-         <input type="hidden" name = "cpass" value = "">
-         <input type="hidden" name = "ref" value = "${dto.ref}">
-         <input type="hidden" name = "re_step" value = "${dto.re_step}">
-         <input type="hidden" name = "re_level" value = "${dto.re_level}">
+         <input type="text" name = "num" value = "${dto.num}">
+         <input type="text" name = "ref" value = "${dto.ref}">
+         <input type="text" name = "re_step" value = "${dto.re_step}">
+         <input type="text" name = "re_level" value = "${dto.re_level}">
       </form>
 
 </body>

@@ -5,14 +5,32 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.BoardDAO;
 import board.BoardDTO;
+import board.PageDTO;
 
 public class ContentAction implements CommandAction {
 
 	@Override
 	public String requestPro(HttpServletRequest req, HttpServletResponse res) throws Throwable {
 		int num = Integer.parseInt(req.getParameter("num"));
+		int currentPage =0;
+		if(req.getParameter("currentPage")==null)
+			currentPage=1;
+			else {
+				currentPage = Integer.parseInt(req.getParameter("currentPage"));
+			}	
+		int currPageBlock=0;
+		if(req.getParameter("currPageBlock")==null) {
+			currPageBlock=1;
+			}else {
+				currPageBlock = Integer.parseInt(req.getParameter("currPageBlock"));
+			}
+		//현재 블럭 받아오기
+			
 		//실제데이터 가져오기
-		   
+		PageDTO pdto = new PageDTO();
+		pdto.setCurrentPage(currentPage);
+		pdto.setCurrPageBlock(currPageBlock);
+		
 		//DAO사용.. 인스턴스얻어오기
 		BoardDAO dao = BoardDAO.getInstance();
 		
@@ -21,6 +39,7 @@ public class ContentAction implements CommandAction {
 		
 		//setAttribute를 해줘야 됨
 		req.setAttribute("dto",dto);
+		req.setAttribute("pdto",pdto);
 		
 		return "/board2/content.jsp";
 	}
